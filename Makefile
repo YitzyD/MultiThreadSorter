@@ -5,4 +5,4 @@ mergesort.o: mergesort.c
 	gcc mergesort.c -c -g
 
 clean:
-	rm simpleCSVSorter
+	rm simpleCSVSorter mergesort.o

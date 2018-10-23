@@ -9,6 +9,8 @@ char **fields;
 extern int numFields;
 extern int sortColumn;
 extern int dbSize;
+extern char *searchPath;
+extern char *savePath;
 
 typedef struct movie
 {
@@ -19,10 +21,15 @@ typedef struct movie
 
 extern Movie *head;
 void trim(char **strPtr);
-int readLine(char **buffer);
-int getFields();
+int start();
+void end();
+int readLine(FILE *csv,char **buffer);
+int getFields(FILE *csv);
 int setSortColumn(char *header);
-int dbBuilder();
+int dbBuilder(FILE *csv,Movie **headPtr);
 int mergeSort();
-int printCSV();
+int printCSV(Movie *head);
+int scanDir();
+int openCSV();
+int saveCSV();
 #endif
