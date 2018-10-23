@@ -48,7 +48,7 @@ char *saveDir = NULL;
 int main(int argc, char *argv[])
 {
 	numFields = 28;
-	if(argc < 2 || strcmp(argv[1],"-c") != 0)
+	if(argc < 2 || strcmp(argv[1],"-c") != 0 || argc == 4 || argc == 6)
 	{
 		dprintf(STDERR,"USE: ./SimpleCSVSorter -c header_name [-c startingDirectory] [-o outputDirectory]\n");
 		return -1;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 		sortString = (char *)malloc(128 * sizeof(char));
 		strcpy(sortString,argv[2]);
 	}
-	if(argc > 3 && strcmp(argv[3],"-d") == 0 && strcmp(argv[4],"") != 0)
+	if(argc > 4 && strcmp(argv[3],"-d") == 0 && strcmp(argv[4],"") != 0)
 	{
 		searchDir = (char *) malloc(256 * sizeof(char));
 		strcpy(searchDir,argv[4]);
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 	{
 		searchDir = NULL;
 	}
-	if(argc > 5 && strcmp(argv[5],"-o") == 0 && strcmp(argv[6],"") != 0)
+	if(argc > 6 && strcmp(argv[5],"-o") == 0 && strcmp(argv[6],"") != 0)
 	{
 		saveDir = (char *) malloc(256 * sizeof(char));
 		strcpy(saveDir,argv[6]);
@@ -86,6 +86,7 @@ int main(int argc, char *argv[])
 	}*/
 	start();
 }
+/*TODO: add cahr *path parameter instead of using searchDir*/
 int scanDir()
 {
 	if(searchDir == NULL)
@@ -94,11 +95,12 @@ int scanDir()
 		getcwd(searchDir,256);
 	}
 	DIR *dir = opendir(searchDir);
-	struct dirent *contents = readdir(dir);
 	if(dir == NULL)
 	{
+		prog_log("Directory: %s does not exist",searchDir);
 		return -1;
 	}
+	struct dirent *contents = readdir(dir);
 	while(contents != NULL)
 	{
 		if(contents -> d_type == DT_DIR)
