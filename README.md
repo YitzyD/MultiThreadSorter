@@ -1,1 +1,1 @@
-# scannerCSVsorter
+# ScannerCSVSorter
