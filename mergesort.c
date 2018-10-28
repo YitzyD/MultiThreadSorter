@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "simpleCSVSorter.h"
+#include "scannerCSVSorter.h"
 
 
 Movie *getMiddle(Movie *h)

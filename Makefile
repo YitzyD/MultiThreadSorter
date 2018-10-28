@@ -1,8 +1,8 @@
-all: mergesort.o simpleCSVSorter.c
-	gcc mergesort.o simpleCSVSorter.c -o simpleCSVSorter -g
+all: mergesort.o scannerCSVSorter.c
+	gcc mergesort.o scannerCSVSorter.c -o scannerCSVSorter -g
 
 mergesort.o: mergesort.c
 	gcc mergesort.c -c -g
 
 clean:
-	rm simpleCSVSorter mergesort.o
+	rm scannerCSVSorter mergesort.o
