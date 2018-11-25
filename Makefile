@@ -1,8 +1,8 @@
-all: mergesort.o scannerCSVSorter.c
-	gcc mergesort.o scannerCSVSorter.c -o scannerCSVSorter -g
+all: mergesort.o multiThreadSorter.c
+	gcc mergesort.o multiThreadSorter.c -o multiThreadSorter -g -pthread
 
 mergesort.o: mergesort.c
 	gcc mergesort.c -c -g
 
 clean:
-	rm scannerCSVSorter mergesort.o
+	rm multiThreadSorter mergesort.o
