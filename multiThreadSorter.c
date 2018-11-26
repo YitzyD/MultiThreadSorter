@@ -200,6 +200,7 @@ void *fileHandlerRunner(void *arg)
 		pthread_exit(NULL);
 	}
 }
+/*Spawns a thread to handle directories*/
 void *dirHandlerRunner(void *arg)
 {
 	fflush(0);
@@ -211,6 +212,7 @@ void *dirHandlerRunner(void *arg)
 		pthread_exit(NULL);
 	}
 }
+/*Scans the directory at path, running the appropriate handler for files/directories*/
 int scanDir(char *path)
 {
 	DIR *dir = opendir(path);
@@ -276,6 +278,7 @@ int scanDir(char *path)
 	//free(threads);
 	return count;
 }
+/*Initials UI and and controls program order*/
 int start()
 {
 	initTID = pthread_self();
@@ -302,6 +305,7 @@ int start()
 		return 0;
 	}
 }
+/*Trims leading/trailing whitespace*/
 void trim(char **strPtr)
 {
 	char *str = *strPtr;
@@ -362,6 +366,7 @@ int readLine(FILE *csv, char **buffer)
 	}
 	return counter;
 }
+/*Matches the header in fields, and returns the index*/
 int getSortColumn(char *header, char **fields)
 {
 	int i;
@@ -374,7 +379,7 @@ int getSortColumn(char *header, char **fields)
 	}
 	return -1;
 }
-
+/*Gets the first line of a CSV file into fields*/
 int getFields(FILE *csv, char** fields)
 {
 	/*Reading line in as header fields*/
@@ -385,6 +390,7 @@ int getFields(FILE *csv, char** fields)
 	}
 	return 0;
 }
+/*Builds a Movie DB - linked list - into headPtr from a CSV*/
 int dbBuilder(FILE *csv, Movie **headPtr, char **fields)
 {
 	Movie *head = NULL;
@@ -435,6 +441,7 @@ int dbBuilder(FILE *csv, Movie **headPtr, char **fields)
 	head -> previousMovie = prevMovie;
 	*headPtr = head;
 }
+/*Saves the Movie DB in head with the fields line into a new file at SaveDir path*/
 int saveCSV(Movie *head,char **fields)
 {
 	char *newFile = (char *)malloc(256 * sizeof(char));
